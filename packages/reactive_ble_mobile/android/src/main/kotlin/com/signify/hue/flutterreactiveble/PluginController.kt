@@ -442,17 +442,9 @@ class PluginController : ActivityResultListener {
         requestCode: Int,
         resultCode: Int,
         data: Intent?,
-    ): Boolean {
-        if (requestCode == CompanionHandler.SELECT_DEVICE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
-                return false
-            }
-
-            companionHandler.onActivityResult(data) ?: return false
-
-            return true
-        }
-
-        return false
-    }
+    ): Boolean =
+        requestCode == CompanionHandler.SELECT_DEVICE_REQUEST_CODE &&
+            resultCode == Activity.RESULT_OK &&
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.O &&
+            companionHandler.onActivityResult(data) != null
 }
