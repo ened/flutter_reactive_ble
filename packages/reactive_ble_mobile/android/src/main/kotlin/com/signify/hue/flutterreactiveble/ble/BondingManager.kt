@@ -11,15 +11,10 @@ import com.polidea.rxandroidble2.RxBleDevice
 import io.reactivex.Single
 import io.reactivex.disposables.Disposables
 
-/**
- * Created by clement on 2017-08-24.
- */
-
 class BondingFailedException : RuntimeException()
 
 class BondingManager(private val context: Context) {
     /**
-     * TODO: try to understand why the popup is being displayed in the notification center (sometimes) ???!!!
      * @throws BondingFailedException
      */
     @SuppressLint("MissingPermission")
@@ -65,9 +60,7 @@ class BondingManager(private val context: Context) {
 
             completion.setDisposable(
                 Disposables.fromAction {
-                    context.unregisterReceiver(
-                        receiver,
-                    )
+                    context.unregisterReceiver(receiver)
                 },
             )
 
